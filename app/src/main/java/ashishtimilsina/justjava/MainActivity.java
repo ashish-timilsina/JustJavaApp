@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.TextView;
-import java.text.NumberFormat;
 
 /**
  * This app displays an order form to order coffee.
  */
 public class MainActivity extends ActionBarActivity {
+    int quantity = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +23,14 @@ public class MainActivity extends ActionBarActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        int quantity = 5;
-        display(quantity);
-        displayPrice(quantity*5);
+        String priceMessage = "Total: $" + (quantity*5) +"\nThank you!!";
+        displayMessage(priceMessage);
+
+    }
+
+    private void displayMessage(String message) {
+        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
+        priceTextView.setText(message);
     }
 
     /**
@@ -36,21 +41,15 @@ public class MainActivity extends ActionBarActivity {
                 R.id.quantity_text_view);
         quantityTextView.setText("" + number);
     }
-    /**
-     * This method displays the price of a given quantity on the screen.
-     */
-        private void displayPrice(int number){
-            TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-            priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
-
-    }
 
     public void increment(View view){
-        int quantity = 3;
+
+        quantity = quantity + 1;
         display(quantity);
     }
     public void decrement(View view){
-        int quantity = 1;
+
+        quantity = quantity - 1;
         display(quantity);
     }
 
